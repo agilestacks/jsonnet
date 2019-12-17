@@ -42,6 +42,50 @@
     
   },
 
+  deployment(name,replicas=1):: {
+    kind: "Deployment",
+    apiVersion: "apps/v1",
+    spec: {
+      replicas: replicas,
+      selector: {
+        matchLabels: {
+          app: name
+        },
+      },
+      template: {
+        metadata: {
+          labels: {
+            app: name
+          },
+        },
+        spec: {
+          initContainers: [],
+          containers: [],
+        },
+      },
+    },
+    metadata: {
+      name: name,
+      annotations: {},
+      labels: {},
+    },
+  },
+
+  container(name, image, imagePullPolicy="Always", ports=[],command=[],):: {
+    name: name,
+    image: image,
+    imagePullPolicy: imagePullPolicy,
+    env: [],
+    command: command,
+    ports: [
+      { containerPort: p }
+      for p in ports
+    ],
+    resources: {
+      limits: {},
+    },
+  },
+
   ingressRule(host, serviceName, servicePort=80, path="/"):: {
     host: host,
     http: {
