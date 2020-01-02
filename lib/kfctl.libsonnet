@@ -1,10 +1,5 @@
 {
-  Definition(name, namespace, repoUri, repoName="manifests", version="v0.7.0"):: {
-    local defaultRepo = {
-      name: repoName,
-      uri: repoUri,
-    },
-
+  Definition(name, namespace, version="v0.7.1"):: {
     kind: "KfDef",
     apiVersion: "kfdef.apps.kubeflow.org/v1beta1",
     metadata: {
@@ -14,12 +9,17 @@
     spec: {
       applications: [],
       version: version,
-      repos: [defaultRepo],
+      repos: [],
     },
   },
 
+  Repo(name, uri):: {
+    name: name,
+    uri: uri,
+  },
+
   KustomizeConfig(repoPath, repoName="manifests", name="", overlays=[], parameters=[]):: {
-    local parts = std.split(repoPath, '/'), 
+    local parts = std.split(repoPath, '/'),
     kustomizeConfig: std.prune({
       name: if name == "" then parts[std.length(parts)-1] else name,
       repoRef: {
