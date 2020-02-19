@@ -100,4 +100,8 @@
       ]
     }
   },
+  envVar(name, value="") {
+    name: name,
+    value: if value == "" then std.extVar(name) else value,
+  },
 }
