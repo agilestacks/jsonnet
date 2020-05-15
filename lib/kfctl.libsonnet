@@ -1,7 +1,7 @@
 {
-  Definition(name, namespace, version="v0.7.1"):: {
+  Definition(name, namespace, version="v1.0.2", apiVersion="kfdef.apps.kubeflow.org/v1"):: {
     kind: "KfDef",
-    apiVersion: "kfdef.apps.kubeflow.org/v1beta1",
+    apiVersion: apiVersion,
     metadata: {
       name: name,
       namespace: namespace,
