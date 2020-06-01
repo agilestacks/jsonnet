@@ -35,4 +35,9 @@
     name: name,
     value: value,
   },
+  
+  NameValue(name, value):: {
+    name: name,
+    value: value,
+  },
 }
