@@ -6,8 +6,11 @@
     local hostpath = std.splitLimit(stripP, "/", 1);
     local host = if std.length(hostpath) > 0 then hostpath[0] else "";
     local hasPort = std.findSubstr(":", host);
-    local port = if std.length(hasPort) > 0 then std.substr(host, hasP[0]+1, std.length(host)) else 
-      if protocol == "https" then "443" else "80";
+    local port = if std.length(hasPort) > 0 
+      then 
+        std.substr(host, hasPort[0]+1, std.length(host)) 
+      else 
+        if protocol == "https" then "443" else "80";
     std.prune({
       protocol: protocol,
       host: host,
@@ -15,4 +18,3 @@
       pathname: if std.length(hostpath) > 1 then hostpath[1],
     }),
 }
-
